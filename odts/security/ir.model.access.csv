@@ -1,2 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_mod_box_tbl,mod.box.tbl,model_mod_box_tbl,group_medios,1,1,1,1
+access_mod_canal5_tbl,mod.canal5.tbl,model_mod_canal5_tbl,group_medios,1,1,1,1
+access_mod_come_tbl,mod.come.tbl,model_mod_come_tbl,group_medios,1,1,1,1
+access_mod_enlatados_tbl,mod.enlatados.tbl,model_mod_enlatados_tbl,group_medios,1,1,1,1
+access_mod_revista_tbl,mod.revista.tbl,model_mod_revista_tbl,group_medios,1,1,1,1
+access_mod_deportivos_tbl,mod.deportivos.tbl,model_mod_deportivos_tbl,group_medios,1,1,1,1
+access_mod_lucha_tbl,mod.lucha.tbl,model_mod_lucha_tbl,group_medios,1,1,1,1
+access_mod_noticieros_tbl,mod.noticieros.tbl,model_mod_noticieros_tbl,group_medios,1,1,1,1
+access_mod_telenovelas_tbl,mod.telenovelas.tbl,model_mod_telenovelas_tbl,group_medios,1,1,1,1
+access_mod_net_tbl,mod.net.tbl,model_mod_net_tbl,group_medios,1,1,1,1

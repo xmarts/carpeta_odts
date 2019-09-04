@@ -6,12 +6,36 @@ class MolOdtMedios(models.Model):
 	_inherit = "odt.medios"
 
 	#CAMPOS EDITADOS
-	target_compra_modulo = fields.Selection([('1','Niños 4-12'),('2','Jóvenes 13-18'),('3','Personas 19+'),('4','Hombres 19+'),('5','Mujeres 19+'),('6','Amas de casa 19-54 S/DE'),('7','Personas 19-54 S/DE'),('8','Hombres 19-54 S/DE'),('9','Mujeres 19-54 S/DE')],string='Target de compra Módulos o Franja', track_visibility=True)
-	cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
+	target_compra_modulo = fields.Selection([('1','Niños 4-12'),('2','Jóvenes 13-18'),('3','Personas 19+'),('4','Hombres 19+'),('5','Mujeres 19+'),('6','Amas de casa 19-54 S/DE'),('7','Personas 19-54 S/DE'),('8','Hombres 19-54 S/DE'),('9','Mujeres 19-54 S/DE'),('10','Amas de casa')],string='Target de compra Módulos o Franja', track_visibility=True)
+	#cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
+	
+	sc_canales = fields.Selection([('1','Rank Rating'),('2','Afinidad Target')],string='Criterio de selección de canales', track_visibility=True)
+	sc_canales_conocen = fields.Text(string='Especificar canales si ya se conocen', track_visibility=True)
+	rotation_indication = fields.Text(string="Indicación de rotación")
 
 	#CAMPOS NUEVOS
+	ot_inversion = fields.Float(string="Inversión")
+	ot_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
+	ot_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
+	ot_regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+	ot_canales_sel = fields.Selection([('1','Rank Rating'),('2','Afinidad Target')],string='Criterio de selección de canales', track_visibility=True)
+	ot_canales_conocen = fields.Text(string='Especificar si ya se conocen', track_visibility=True)
+	ot_observacion = fields.Text()
+	tabla_ot = fields.One2many('mod.ot.tbl', 'id_ot_tbl', ondelete="cascade")
+	ot_indicar_rotacion = fields.Text(string="Indicar rotación")
+
+	regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
+	regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
+	regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+
+	nt_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
+	nt_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
+	nt_regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+
+	target_tvsa = fields.Char(string="Target")
+
 	aaee_marca_producto = fields.Char(string="Marca o producto")
-	aaee_inversion = fields.Char(string="Inversión")
+	aaee_inversion = fields.Float(string="Inversión")
 
 	telenovelas_bool = fields.Boolean(string='Telenovelas', track_visibility=True)
 	tvsa_requerir_especificaciones = fields.Text(string='', track_visibility=True)
@@ -34,22 +58,19 @@ class MolOdtMedios(models.Model):
 	tvsa_marca_pro_nac = fields.Char(string="Marca o producto")
 
 	sc_inversion = fields.Float(string="Inversión")
-	sc_indicar_rotacion = fields.Char(string="Indicar rotación")
-	sc_cobertura = fields.Selection([('1','Nacional'),('2','Local'),('3','Elección de canales'),('4','Específico si ya lo conocen')], string="Cobertura")
-	sc_local = fields.Char(string="Local")
+	sc_indicar_rotacion = fields.Text(string="Indicar rotación")
+	sc_cobertura = fields.Selection([('1','Nacional'),('2','Local')], string="Cobertura")
+	sc_local = fields.Char(string="Plazas")
 
 	nt_inversion = fields.Float(string="Inversión")
 	nt_conoce_programas = fields.Char(string='Si conoce el(los) programa(s) indicar', track_visibility=True)
-	nt_cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
+	#nt_cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
 	nt_observacion = fields.Char(string=" ")
 
 	#-- FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#
-	@api.depends('tvsa_nse_1','tvsa_nse_2','tvsa_nse_3','tvsa_nse_4','tvsa_grupo_edad_1','tvsa_grupo_edad_2','tvsa_grupo_edad_3','tvsa_grupo_edad_4','tvsa_grupo_edad_5','tvsa_grupo_edad_6','tvsa_grupo_edad_otro')
+	@api.depends('years_03','years_48','years_912','tvsa_rol_family','tvsa_sexo','tvsa_nse_1','tvsa_nse_2','tvsa_nse_3','tvsa_nse_4','tvsa_grupo_edad_1','tvsa_grupo_edad_2','tvsa_grupo_edad_3','tvsa_grupo_edad_4','tvsa_grupo_edad_5','tvsa_grupo_edad_6','tvsa_grupo_edad_otro')
 	def _get_valor_primario(self):
-		nse_1 = ""
-		nse_2 = ""
-		nse_3 = ""
-		nse_4 = ""
+		sexo = ""
 		ge_1 = ""
 		ge_2 = ""
 		ge_3 = ""
@@ -57,31 +78,111 @@ class MolOdtMedios(models.Model):
 		ge_5 = ""
 		ge_6 = ""
 		ge_otro = ""
-		if self.tvsa_nse_1 == True:
-			nse_1 = "ABC+"
-		if self.tvsa_nse_2 == True:
-			nse_2 = ",  C"
-		if self.tvsa_nse_3 == True:
-			nse_3 = ",  D+"
-		if self.tvsa_nse_4 == True:
-			nse_4 = ",  DE"
+		nse_1 = ""
+		nse_2 = ""
+		nse_3 = ""
+		nse_4 = ""
+		rol = ""
+		rn = ""
+		rn2 = ""
+		rn3 = ""
+
+		if self.tvsa_sexo:
+			if self.tvsa_sexo == '1':
+				sexo = 'Personas'
+			elif self.tvsa_sexo == '2':	
+				sexo = 'Mujeres'
+			else:
+				sexo = 'Hombres'
 
 		if self.tvsa_grupo_edad_1 == True:
-			ge_1 = '  4-12'
+			if self.tvsa_sexo :
+				ge_1 = ', 4-12'
+			else:
+				ge_1 = '4-12'
 		if self.tvsa_grupo_edad_2 == True:
-			ge_2 = ',  13-18'
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True:
+				ge_2 = ',  13-18'
+			else:
+				ge_2 = '13-18'
 		if self.tvsa_grupo_edad_3 == True:
-			ge_3 = ',  19-29'
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True:
+				ge_3 = ',  19-29'
+			else:
+				ge_3 = '19-29'
 		if self.tvsa_grupo_edad_4 == True:
-			ge_4 = ',  30-44'
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True:
+				ge_4 = ',  30-44'
+			else:
+				ge_4 = '30-44'
 		if self.tvsa_grupo_edad_5 == True:
-			ge_5 = ',  45-54'
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True:
+				ge_5 = ',  45-54'
+			else:
+				ge_5 = '45-54'	
 		if self.tvsa_grupo_edad_6 == True:
-			ge_6 = ',  55+'
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True:
+				ge_6 = ',  55+'
+			else:
+				ge_6 = '55+'
 		if self.tvsa_grupo_edad_otro:
-			ge_otro = ',  ' + self.tvsa_grupo_edad_otro
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True:
+				ge_otro = ',  ' + self.tvsa_grupo_edad_otro
+			else:	
+				ge_otro = self.tvsa_grupo_edad_otro
 
-		self.tvsa_primario = nse_1 + nse_2 + nse_3 + nse_4 + ge_1 + ge_2 + ge_3 + ge_4 + ge_5 + ge_6 + ge_otro
+		if self.tvsa_nse_1 == True:
+			if self.tvsa_sexo or self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True:
+				nse_1 = ", ABC+"
+			else:
+				nse_1 = "ABC+"
+		if self.tvsa_nse_2 == True:
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True:
+				nse_2 = ",  C"
+			else:
+				nse_2 = "C"
+		if self.tvsa_nse_3 == True:
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True or self.tvsa_nse_2 == True:
+				nse_3 = ",  D+"
+			else:
+				nse_3 = "D+"
+		if self.tvsa_nse_4 == True:
+			if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True or self.tvsa_nse_2 == True or self.tvsa_nse_3 == True:
+				nse_4 = ",  DE"
+			else:	
+				nse_4 = "DE"
+
+		if self.tvsa_rol_family:
+			if self.tvsa_rol_family == '1':
+				if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True or self.tvsa_nse_2 == True or self.tvsa_nse_3 == True or self.tvsa_nse_4 == True:
+					rol = ', Jefes de Familia'
+				else:
+					rol = 'Jefes de Familia'	
+			elif self.tvsa_rol_family == '2':
+				if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True or self.tvsa_nse_2 == True or self.tvsa_nse_3 == True or self.tvsa_nse_4 == True:
+					rol = ', Amas de casa'
+				else:
+					rol = 'Amas de casa'
+			else:
+				if self.tvsa_sexo or self.tvsa_grupo_edad_1 == True or self.tvsa_grupo_edad_2 == True or self.tvsa_grupo_edad_3 == True or self.tvsa_grupo_edad_4 == True or self.tvsa_grupo_edad_5 == True or self.tvsa_grupo_edad_6 == True or self.tvsa_grupo_edad_otro == True or self.tvsa_nse_1 == True or self.tvsa_nse_2 == True or self.tvsa_nse_3 == True or self.tvsa_nse_4 == True:
+					rol = ', Responsables de niños:'
+				else:
+					rol = 'Responsables de niños: '	
+
+		if self.years_03 == True:
+			rn = ' 0 a 3 años'
+		if self.years_48 == True:
+			if self.years_03 == True:
+				rn2 = ', 4 a 8 años'
+			else:
+				rn2 = ' 4 a 8 años'	
+		if self.years_912 == True:
+			if self.years_03 == True or self.years_48 == True:
+				rn3 = ', 9 a 12 años'
+			else:
+				rn3 = ' 9 a 12 años'	
+
+		self.tvsa_primario = sexo + ge_1 + ge_2 + ge_3 + ge_4 + ge_5 + ge_6 + ge_otro + nse_1 + nse_2 + nse_3 + nse_4 + rol + rn + rn2 + rn3
 		#-- FIN FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#
 		
 class TablaTVabiertaAdi(models.Model):
@@ -187,13 +288,23 @@ class ModTelenovelasTbl(models.Model):
 	telenovelas_programa = fields.Char(string="Programa")
 	telenovelas_genero = fields.Char(string="Genero", default="Telenovelas")
 	telenovelas_duracion = fields.Char(string="Duración")
-	telenovelas_especificar_aaee = fields.Selection([('1','Sin resultados')], string="Especificar AAEE")
+	telenovelas_especificar_aaee = fields.Selection([('1','Cortinilla a corte'),('2','Cortinilla argumental'),('3','Promos vea'),('4','Patrocinio avances'),('5','Integración ambiental'),('6','Integración activa'),('7','Integración argumental')], string="Especificar AAEE")
 
 class ModNetTbl(models.Model):
 	_name = "mod.net.tbl"
 
 	id_net_tbl = fields.Many2one('odt.medios')
-	nt_network = fields.Char(string="Network")
-	nt_tipo_actividad = fields.Selection([('1','Spoteo'),('2','Acciones especiales')], string="Tipo actividad")
-	nt_duracion = fields.Char(string="Duración")
-	nt_especificar_aaee = fields.Char(string="Especificar AAEE")
+	nt_network_tbl = fields.Char(string="Network")
+	nt_tipo_actividad_tbl = fields.Selection([('1','Spoteo'),('2','Acciones especiales')], string="Tipo actividad")
+	nt_duracion_tbl = fields.Char(string="Duración")
+	nt_programa_tbl= fields.Char(string="Programa")
+	nt_especificar_aaee_tbl = fields.Char(string="Especificar AAEE")
+
+class ModOtTbl(models.Model):
+	_name = "mod.ot.tbl"
+
+	id_ot_tbl = fields.Many2one('odt.medios')
+	ot_ta = fields.Selection([('1','Acciones especiales'),('2','Spoteo')], string="Tipo de actividad")
+	ot_dura = fields.Char(string="Duración")
+	ot_eaaee = fields.Char(string="Especificar AAEE (Sujeto a consulta con cada network)")
+
