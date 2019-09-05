@@ -67,7 +67,6 @@
                   <field name="tabla_box_bool" widget="one2many_list" attrs="{'invisible':[('box_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="box_canal"/>
-                        <field name="box_programa"/>
                         <field name="box_genero" readonly="1"/>
                         <field name="box_duracion"/>
                         <field name="box_especificar_aaee"/>
@@ -79,7 +78,6 @@
                   <field name="tabla_canal5_bool" widget="one2many_list" attrs="{'invisible':[('canal5_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="canal5_canal"/>
-                        <field name="canal5_programa"/>
                         <field name="canal5_genero" readonly="1"/>
                         <field name="canal5_duracion"/>
                         <field name="canal5_especificar_aaee"/>
@@ -91,7 +89,6 @@
                   <field name="tabla_comedia_bool" widget="one2many_list" attrs="{'invisible':[('comedia_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="comedia_canal"/>
-                        <field name="comedia_programa"/>
                         <field name="comedia_genero" readonly="1"/>
                         <field name="comedia_duracion"/>
                         <field name="comedia_especificar_aaee"/>
@@ -103,7 +100,6 @@
                   <field name="tabla_enlatados_bool" widget="one2many_list" attrs="{'invisible':[('canal9_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="enlatados_canal"/>
-                        <field name="enlatados_programa"/>
                         <field name="enlatados_genero" readonly="1"/>
                         <field name="enlatados_duracion"/>
                         <field name="enlatados_especificar_aaee"/>
@@ -115,7 +111,6 @@
                   <field name="tabla_revista_bool" widget="one2many_list" attrs="{'invisible':[('revista_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="revista_canal"/>
-                        <field name="revista_programa"/>
                         <field name="revista_genero" readonly="1"/>
                         <field name="revista_duracion"/>
                         <field name="revista_especificar_aaee"/>
@@ -127,7 +122,6 @@
                   <field name="tabla_deportivos_bool" widget="one2many_list" attrs="{'invisible':[('deportivos_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="deportivos_canal"/>
-                        <field name="deportivos_programa"/>
                         <field name="deportivos_genero" readonly="1"/>
                         <field name="deportivos_duracion"/>
                         <field name="deportivos_especificar_aaee"/>
@@ -139,7 +133,6 @@
                   <field name="tabla_lucha_bool" widget="one2many_list" attrs="{'invisible':[('lucha_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="lucha_canal"/>
-                        <field name="lucha_programa"/>
                         <field name="lucha_genero" readonly="1"/>
                         <field name="lucha_duracion"/>
                         <field name="lucha_especificar_aaee"/>
@@ -151,7 +144,6 @@
                   <field name="tabla_noticieros_bool" widget="one2many_list" attrs="{'invisible':[('noticiero_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="noticieros_canal"/>
-                        <field name="noticieros_programa"/>
                         <field name="noticieros_genero" readonly="1"/>
                         <field name="noticieros_duracion"/>
                         <field name="noticieros_especificar_aaee"/>
@@ -163,7 +155,6 @@
                   <field name="tabla_telenovelas_bool" widget="one2many_list" attrs="{'invisible':[('telenovelas_bool', '=', False)]}">
                     <tree editable="bottom">
                         <field name="telenovelas_canal"/>
-                        <field name="telenovelas_programa"/>
                         <field name="telenovelas_genero" readonly="1"/>
                         <field name="telenovelas_duracion"/>
                         <field name="telenovelas_especificar_aaee"/>
