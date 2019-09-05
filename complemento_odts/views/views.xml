@@ -190,7 +190,7 @@
             <page name="Tabla Foro TV" string="Foro TV">
                 <field name="tabla_forotv_medios" widget="one2many_list">
                   <tree editable="bottom">
-                    <field name="name"/>
+                    <field name="name" string="Foro tv"/>
                     <field name="tipo_actividad"/>
                     <field name="duracion" attrs="{'readonly': [('tipo_actividad','!=','1')]}"/>
                     <field name="especificacion" attrs="{'readonly': [('tipo_actividad','=', '1')]}"/>
