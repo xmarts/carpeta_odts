@@ -6,6 +6,7 @@ class MolOdtMedios(models.Model):
 	_inherit = "odt.medios"
 
 	#CAMPOS EDITADOS
+	target_especial = fields.Char(string='En caso de ser Target de compra especial, especificar', track_visibility=True)
 	target_compra_modulo = fields.Selection([('1','Niños 4-12'),('2','Jóvenes 13-18'),('3','Personas 19+'),('4','Hombres 19+'),('5','Mujeres 19+'),('6','Amas de casa 19-54 S/DE'),('7','Personas 19-54 S/DE'),('8','Hombres 19-54 S/DE'),('9','Mujeres 19-54 S/DE'),('10','Amas de casa')],string='Target de compra Módulos o Franja', track_visibility=True)
 	#cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
 	
@@ -17,55 +18,66 @@ class MolOdtMedios(models.Model):
 	ot_inversion = fields.Float(string="Inversión")
 	ot_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
 	ot_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
-	ot_regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+	ot_regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
 	ot_canales_sel = fields.Selection([('1','Rank Rating'),('2','Afinidad Target')],string='Criterio de selección de canales', track_visibility=True)
 	ot_canales_conocen = fields.Text(string='Especificar si ya se conocen', track_visibility=True)
 	ot_observacion = fields.Text()
-	tabla_ot = fields.One2many('mod.ot.tbl', 'id_ot_tbl', ondelete="cascade")
-	ot_indicar_rotacion = fields.Text(string="Indicar rotación")
+	tabla_ot = fields.One2many('mod.ot.tbl', 'id_ot_tbl', ondelete="cascade", track_visibility=True)
+	ot_indicar_rotacion = fields.Text(string="Indicar rotación", track_visibility=True)
 
 	regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
 	regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
-	regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+	regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
+
+	spot_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
+	spot_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
+	spot_regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
+
 
 	nt_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
 	nt_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
-	nt_regulacion_kinds = fields.Boolean(string="Kinds policy", track_visibility=True)
+	nt_regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
 
-	target_tvsa = fields.Char(string="Target")
+	target_tvsa = fields.Char(string="Target", track_visibility=True)
 
-	aaee_marca_producto = fields.Char(string="Marca o producto")
-	aaee_inversion = fields.Float(string="Inversión")
+	aaee_marca_producto = fields.Char(string="Marca o producto", track_visibility=True)
+	aaee_inversion = fields.Float(string="Inversión", track_visibility=True)
 
 	telenovelas_bool = fields.Boolean(string='Telenovelas', track_visibility=True)
 	tvsa_requerir_especificaciones = fields.Text(string='', track_visibility=True)
 	tvsa_abierta_observaciones_dos = fields.Text(string='', track_visibility=True)
 
-	tabla_box_bool = fields.One2many('mod.box.tbl', 'id_box_tbl', ondelete="cascade")
-	tabla_canal5_bool = fields.One2many('mod.canal5.tbl', 'id_canal5_tbl', ondelete="cascade")
-	tabla_comedia_bool = fields.One2many('mod.come.tbl', 'id_comedia_tbl', ondelete="cascade")
-	tabla_enlatados_bool = fields.One2many('mod.enlatados.tbl', 'id_enlatados_tbl', ondelete="cascade")
-	tabla_revista_bool = fields.One2many('mod.revista.tbl', 'id_revista_tbl', ondelete="cascade")
-	tabla_deportivos_bool = fields.One2many('mod.deportivos.tbl', 'id_deportivos_tbl', ondelete="cascade")
-	tabla_lucha_bool = fields.One2many('mod.lucha.tbl', 'id_lucha_tbl', ondelete="cascade")
-	tabla_noticieros_bool = fields.One2many('mod.noticieros.tbl', 'id_noticieros_tbl', ondelete="cascade")
-	tabla_telenovelas_bool = fields.One2many('mod.telenovelas.tbl', 'id_telenovelas_tbl', ondelete="cascade")
+	tvsa_local_rotacion = fields.Char(string="Indicar rotación", track_visibility=True)
+	tvsa_local_rotacion_dos = fields.Char(string="Indicar rotación", track_visibility=True)
+	tvsa_local_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
+	tvsa_local_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
+	tvsa_local_regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
 
-	nt_tabla_net =fields.One2many('mod.net.tbl', 'id_net_tbl', ondelete="cascade")
+	tabla_box_bool = fields.One2many('mod.box.tbl', 'id_box_tbl', ondelete="cascade", track_visibility=True)
+	tabla_canal5_bool = fields.One2many('mod.canal5.tbl', 'id_canal5_tbl', ondelete="cascade", track_visibility=True)
+	tabla_comedia_bool = fields.One2many('mod.come.tbl', 'id_comedia_tbl', ondelete="cascade", track_visibility=True)
+	tabla_enlatados_bool = fields.One2many('mod.enlatados.tbl', 'id_enlatados_tbl', ondelete="cascade", track_visibility=True)
+	tabla_revista_bool = fields.One2many('mod.revista.tbl', 'id_revista_tbl', ondelete="cascade", track_visibility=True)
+	tabla_deportivos_bool = fields.One2many('mod.deportivos.tbl', 'id_deportivos_tbl', ondelete="cascade", track_visibility=True)
+	tabla_lucha_bool = fields.One2many('mod.lucha.tbl', 'id_lucha_tbl', ondelete="cascade", track_visibility=True)
+	tabla_noticieros_bool = fields.One2many('mod.noticieros.tbl', 'id_noticieros_tbl', ondelete="cascade", track_visibility=True)
+	tabla_telenovelas_bool = fields.One2many('mod.telenovelas.tbl', 'id_telenovelas_tbl', ondelete="cascade", track_visibility=True)
 
-	tvsa_primario = fields.Char(string="Primario", compute="_get_valor_primario")
-	tvsa_marca_pro = fields.Char(string="Marca o producto")
-	tvsa_marca_pro_nac = fields.Char(string="Marca o producto")
+	nt_tabla_net =fields.One2many('mod.net.tbl', 'id_net_tbl', ondelete="cascade", track_visibility=True)
 
-	sc_inversion = fields.Float(string="Inversión")
-	sc_indicar_rotacion = fields.Text(string="Indicar rotación")
-	sc_cobertura = fields.Selection([('1','Nacional'),('2','Local')], string="Cobertura")
-	sc_local = fields.Char(string="Plazas")
+	tvsa_primario = fields.Char(string="TERGET PRIMARIO CREADO", compute="_get_valor_primario", track_visibility=True)
+	tvsa_marca_pro = fields.Char(string="Marca o producto", track_visibility=True)
+	tvsa_marca_pro_nac = fields.Char(string="Marca o producto", track_visibility=True)
 
-	nt_inversion = fields.Float(string="Inversión")
+	sc_inversion = fields.Float(string="Inversión", track_visibility=True)
+	sc_indicar_rotacion = fields.Text(string="Indicar rotación", track_visibility=True)
+	sc_cobertura = fields.Selection([('1','Nacional'),('2','Local')], string="Cobertura", track_visibility=True)
+	sc_local = fields.Char(string="Plazas", track_visibility=True)
+
+	nt_inversion = fields.Float(string="Inversión", track_visibility=True)
 	nt_conoce_programas = fields.Char(string='Si conoce el(los) programa(s) indicar', track_visibility=True)
 	#nt_cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
-	nt_observacion = fields.Char(string=" ")
+	nt_observacion = fields.Char(string=" ", track_visibility=True)
 
 	#-- FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#
 	@api.depends('years_03','years_48','years_912','tvsa_rol_family','tvsa_sexo','tvsa_nse_1','tvsa_nse_2','tvsa_nse_3','tvsa_nse_4','tvsa_grupo_edad_1','tvsa_grupo_edad_2','tvsa_grupo_edad_3','tvsa_grupo_edad_4','tvsa_grupo_edad_5','tvsa_grupo_edad_6','tvsa_grupo_edad_otro')
@@ -204,7 +216,7 @@ class ModBoxTbl(models.Model):
 	box_programa = fields.Char(string="Programa")
 	box_genero = fields.Char(string="Genero", default="Box")
 	box_duracion = fields.Char(string="Duración")
-	box_especificar_aaee = fields.Selection([('1','Super'),('2','Banner'),('3','Mención 10"'),('4','Mención 20"'),('5','Cortinilla a corte'),('6','Patrocinio de Programa'),('7','Patrocinio de Sección')], string="Especificar AAEE")
+	box_especificar_aaee = fields.Selection([('1','Super'),('2','Banner'),('3','Mención 10"'),('4','Mención 20"'),('5','Cortinilla a corte'),('6','Patrocinio de programa'),('7','Patrocinio de sección')], string="Especificar AAEE")
 
 class ModCanal5Tbl(models.Model):
 	_name = "mod.canal5.tbl"
@@ -214,7 +226,7 @@ class ModCanal5Tbl(models.Model):
 	canal5_programa = fields.Char(string="Programa")
 	canal5_genero = fields.Char(string="Genero", default="Caricaturas, películas y series")
 	canal5_duracion = fields.Char(string="Duración")
-	canal5_especificar_aaee = fields.Selection([('1','Edición creativa'),('2','Cortinilla a corte'),('3','L en contenido'),('4','Patrocinio de programa'),('5','Promos Vea'),('6','Social TV'),('7','BUG (Logo)')], string="Especificar AAEE")
+	canal5_especificar_aaee = fields.Selection([('1','Edición creativa'),('2','Cortinilla a corte'),('3','L en contenido'),('4','Patrocinio de programa'),('5','Promos vea'),('6','Social TV'),('7','BUG (Logo)')], string="Especificar AAEE")
 
 class ModComediaTbl(models.Model):
 	_name = "mod.come.tbl"
@@ -224,7 +236,7 @@ class ModComediaTbl(models.Model):
 	comedia_programa = fields.Char(string="Programa")
 	comedia_genero = fields.Char(string="Genero", default="Comedia")
 	comedia_duracion = fields.Char(string="Duración")
-	comedia_especificar_aaee = fields.Selection([('1','Cortinilla a corte'),('2','Avance del Programa'),('3','Patrocinio de programa')], string="Especificar AAEE")
+	comedia_especificar_aaee = fields.Selection([('1','Cortinilla a corte'),('2','Avance del programa'),('3','Patrocinio de programa')], string="Especificar AAEE")
 
 class ModEnlatadosTbl(models.Model):
 	_name = "mod.enlatados.tbl"
@@ -245,7 +257,7 @@ class ModRevistaTbl(models.Model):
 	revista_genero = fields.Char(string="Genero", default="Revista")
 	revista_duracion = fields.Char(string="Duración")
 	revista_especificar_aaee = fields.Selection([('1','Pleca'),('2','Super'),('3','Banner'),('4','Mención 30"'),('5','Mención 60"'),
-								('6','Mención 120"'),('7','Promos Vea'),('8','Patrocinio de Programa'),('9','Patrocinio de sección'),
+								('6','Mención 120"'),('7','Promos vea'),('8','Patrocinio de programa'),('9','Patrocinio de sección'),
 								('10','Entrevista 60"'),('11','Entrevista 120"'),('12','Bumper'),('13','Wiper')], string="Especificar AAEE")
 
 class ModDeportivosTbl(models.Model):
@@ -257,7 +269,7 @@ class ModDeportivosTbl(models.Model):
 	deportivos_genero = fields.Char(string="Genero", default="Deportivos")
 	deportivos_duracion = fields.Char(string="Duración")
 	deportivos_especificar_aaee = fields.Selection([('1','Pleca'),('2','Super'),('3','Banner'),('4','Cortinilla a corte'),
-											 		('5','Promos Vea'),('6','Mención 30"'),('7','Mención 60"'),('8','Patrocinio de sección'),('9','Patrocinio de sección con pie'),('10','Patrocinio de programa')], string="Especificar AAEE")
+											 		('5','Promos vea'),('6','Mención 30"'),('7','Mención 60"'),('8','Patrocinio de sección'),('9','Patrocinio de sección con pie'),('10','Patrocinio de programa')], string="Especificar AAEE")
 class ModLuchaTbl(models.Model):
 	_name = "mod.lucha.tbl"
 
@@ -267,7 +279,7 @@ class ModLuchaTbl(models.Model):
 	lucha_genero = fields.Char(string="Genero", default="Lucha Libre")
 	lucha_duracion = fields.Char(string="Duración")
 	lucha_especificar_aaee = fields.Selection([('1','Super'),('2','Banner'),('3','Mención 10"'),('4','Mención 30"'),('5','Mención 60"'),('6','Mención 120"'),('7','Cortinilla a corte'),
-									('8','Patrocinio de Programa'),('9','Patrocinio de Sección'),('10','Patrocinio de sección con pie')], string="Especificar AAEE")
+									('8','Patrocinio de programa'),('9','Patrocinio de sección'),('10','Patrocinio de sección con pie')], string="Especificar AAEE")
 
 class ModNoticierosTbl(models.Model):
 	_name = "mod.noticieros.tbl"
@@ -277,8 +289,8 @@ class ModNoticierosTbl(models.Model):
 	noticieros_programa = fields.Char(string="Programa")
 	noticieros_genero = fields.Char(string="Genero", default="Noticieros")
 	noticieros_duracion = fields.Char(string="Duración")
-	noticieros_especificar_aaee = fields.Selection([('1','Pleca'),('2','Super'),('3','Banner'),('4','Cortinilla a corte'),('5','Promos Vea'),('6','Avance del Programa'),
-								 ('7','Patrocinio de Programa'),('8','Patrocinio de sección'),('9','Resumen Informativo')], string="Especificar AAEE")
+	noticieros_especificar_aaee = fields.Selection([('1','Pleca'),('2','Super'),('3','Banner'),('4','Cortinilla a corte'),('5','Promos vea'),('6','Avance del programa'),
+								 ('7','Patrocinio de programa'),('8','Patrocinio de sección'),('9','Resumen informativo')], string="Especificar AAEE")
 
 class ModTelenovelasTbl(models.Model):
 	_name = "mod.telenovelas.tbl"

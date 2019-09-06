@@ -19,23 +19,12 @@
           <page name="medios_aaeetv" string="AAEE TVA TVSA NAL" attrs="{'invisible': [('med_aaee_tv','=',False)]}">
             <h3>Televisa AAEE TV Abierta Nacional</h3>
               <group>
-                <field name="aaee_marca_producto" required="1"/>
+                <field name="aaee_marca_producto" attrs="{'required':[('med_aaee_tv', '=', True)]}"/>
                 <field name="aaee_inversion"/>
-                <field name="aaeetv_periodo_camp" required="1"/>
+                <field name="aaeetv_periodo_camp" attrs="{'required':[('med_aaee_tv', '=', True)]}"/>
                 <field name="aaee_categoria_televisa"/>
-                <field name="target_primario" required="1"/>
+                <field name="target_primario"/>
                 <field name="tarjet_secudario"/>
-              </group>
-            <h3>Canales Televisa</h3>
-              <group col="12">
-                <group col="12">
-                  <field name="aaeetv_2"/>
-                  <field name="aaeetv_5"/>
-                  <field name="aaeetv_9"/>     
-                </group> 
-              </group>
-              <group>
-                <field name="conoce_programas"/>
               </group>
             <h3>Acciones especiales Standard (de catálogo)</h3>  
               <group>
@@ -68,7 +57,7 @@
                     <tree editable="bottom">
                         <field name="box_canal"/>
                         <field name="box_genero" readonly="1"/>
-                        <field name="box_duracion"/>
+                        <!--<field name="box_duracion"/>-->
                         <field name="box_especificar_aaee"/>
                     </tree>
                   </field>
@@ -79,7 +68,7 @@
                     <tree editable="bottom">
                         <field name="canal5_canal"/>
                         <field name="canal5_genero" readonly="1"/>
-                        <field name="canal5_duracion"/>
+                        <!--<field name="canal5_duracion"/>-->
                         <field name="canal5_especificar_aaee"/>
                     </tree>
                   </field>
@@ -90,7 +79,7 @@
                     <tree editable="bottom">
                         <field name="comedia_canal"/>
                         <field name="comedia_genero" readonly="1"/>
-                        <field name="comedia_duracion"/>
+                        <!--<field name="comedia_duracion"/>-->
                         <field name="comedia_especificar_aaee"/>
                     </tree>
                   </field>
@@ -101,7 +90,7 @@
                     <tree editable="bottom">
                         <field name="enlatados_canal"/>
                         <field name="enlatados_genero" readonly="1"/>
-                        <field name="enlatados_duracion"/>
+                        <!--<field name="enlatados_duracion"/>-->
                         <field name="enlatados_especificar_aaee"/>
                     </tree>
                   </field>
@@ -112,7 +101,7 @@
                     <tree editable="bottom">
                         <field name="revista_canal"/>
                         <field name="revista_genero" readonly="1"/>
-                        <field name="revista_duracion"/>
+                        <!--<field name="revista_duracion"/>-->
                         <field name="revista_especificar_aaee"/>
                     </tree>
                   </field>
@@ -123,7 +112,7 @@
                     <tree editable="bottom">
                         <field name="deportivos_canal"/>
                         <field name="deportivos_genero" readonly="1"/>
-                        <field name="deportivos_duracion"/>
+                        <!--<field name="deportivos_duracion"/>-->
                         <field name="deportivos_especificar_aaee"/>
                     </tree>
                   </field>
@@ -134,7 +123,7 @@
                     <tree editable="bottom">
                         <field name="lucha_canal"/>
                         <field name="lucha_genero" readonly="1"/>
-                        <field name="lucha_duracion"/>
+                        <!--<field name="lucha_duracion"/>-->
                         <field name="lucha_especificar_aaee"/>
                     </tree>
                   </field>
@@ -145,7 +134,7 @@
                     <tree editable="bottom">
                         <field name="noticieros_canal"/>
                         <field name="noticieros_genero" readonly="1"/>
-                        <field name="noticieros_duracion"/>
+                        <!--<field name="noticieros_duracion"/>-->
                         <field name="noticieros_especificar_aaee"/>
                     </tree>
                   </field>
@@ -156,7 +145,7 @@
                     <tree editable="bottom">
                         <field name="telenovelas_canal"/>
                         <field name="telenovelas_genero" readonly="1"/>
-                        <field name="telenovelas_duracion"/>
+                        <!--<field name="telenovelas_duracion"/>-->
                         <field name="telenovelas_especificar_aaee"/>
                     </tree>
                   </field>
@@ -171,10 +160,14 @@
         <xpath expr="//page[@name='medios_local_televisa']" position="replace">
           <page name="medios_local_televisa" string="Televisa TV Abierta Local" attrs="{'invisible': [('med_spot_tv_abierta','=',False)]}">
             <group>
-              <field name="tvsa_marca_pro" required="1"/>
+              <field name="tvsa_marca_pro" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="tvsa_local"/>
-              <field name="period_campania_tvab" required="1"/>
+              <field name="period_campania_tvab" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="target_tvsa"/>
+              <h3>Regulación</h3>
+              <field name="tvsa_local_regulacion_cofepris"/>
+              <field name="tvsa_local_regulacion_favor"/>
+              <field name="tvsa_local_regulacion_kids"/>
             </group>
             <page name="Tabla plazas" string="Plazas">
                 <field name="tabla_plaza_medios" widget="one2many_list">
@@ -186,6 +179,9 @@
                   </tree>
                 </field>
             </page>
+            <group>
+              <field name="tvsa_local_rotacion"/>
+            </group>
             <br/>
             <page name="Tabla Foro TV" string="Foro TV">
                 <field name="tabla_forotv_medios" widget="one2many_list">
@@ -197,6 +193,9 @@
                   </tree>
                 </field>
             </page>
+            <group>
+              <field name="tvsa_local_rotacion_dos"/>
+            </group>
             <br/>
             <field name="tvsa_abierta_observaciones" placeholder="Observaciones"/>
             <group>
@@ -204,10 +203,7 @@
                 NOTA:<br/>
                 1. La duración de los bloqueos es de 20”. No disponible en IV Q.
                 <br/>
-                2.- En caso de elegir dos duraciones o más en spoteo, favor de indicar en
-                observaciones la rotación.
-                <br/>
-                3.- Acciones especiales que pueden solicitarse: Cámara portátil x Hora,
+                2.- Acciones especiales que pueden solicitarse: Cámara portátil x Hora,
                 Prod. / Edición Cápsula 60”, Mención en vivo 60”, Mención Grabada 60”, Entrevista 180”,
                 Transmisión cápsula producida 60”, Transmisión cápsula grabada 40”, Cortinilla 5” c/u,
                 Cintillo 5”, Presencia de Marca, Patrocinio de Sección.
@@ -221,9 +217,9 @@
         <xpath expr="//page[@name='medios_tv_abierta']" position="replace">
           <page name="medios_tv_abierta" string="Televisa Spoteo TV Abierta Nacional" attrs="{'invisible': [('med_spot_tv_abierta','=',False)]}">
             <group string="Televisa Spoteo TV Abierta Nacional">
-              <field name="tvsa_marca_pro_nac" required="1"/>
+              <field name="tvsa_marca_pro_nac" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="tvsa_abierta"/>
-              <field name="sptv_periodo_camp2" required="1"/>
+              <field name="sptv_periodo_camp2" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="tvsa_catego_televisa"/>
               <h5>Duracion Spot</h5>
             </group>
@@ -242,7 +238,7 @@
             </group>
             <group>
               <h3>Target de planeación</h3>
-              <field name="target_planed_primary" string="Primario" required="1"/>
+              <field name="target_planed_primary" string="Primario"/>
               <field name="target_planed_second" string="Secundario"/>
               <h3>Condiciones</h3>
               <field name="opcion_compra"/>
@@ -254,7 +250,7 @@
               <!--<field name="cofepris"/>-->
               <field name="regulacion_cofepris"/>
               <field name="regulacion_favor"/>
-              <field name="regulacion_kinds"/>
+              <field name="regulacion_kids"/>
               <field name="canal_1" attrs="{'invisible':[('opcion_compra','!=','4'),('opcion_compra','!=','5')]}"/>
               <field name="canal_2" attrs="{'invisible':[('opcion_compra','!=','4'),('opcion_compra','!=','5')]}"/>
               <field name="canal_3" attrs="{'invisible':[('opcion_compra','!=','4'),('opcion_compra','!=','5')]}"/>
@@ -295,6 +291,8 @@
                 <field name="years_03" attrs="{'invisible': [('tvsa_rol_family','!=','3')]}"/>
                 <field name="years_48" attrs="{'invisible': [('tvsa_rol_family','!=','3')]}"/>
                 <field name="years_912" attrs="{'invisible': [('tvsa_rol_family','!=','3')]}"/>
+                <br/>
+                <br/>
               <field name="tvsa_primario"/>
             </group>
             <div class="text-muted">
@@ -311,14 +309,22 @@
         <xpath expr="//page[@name='medios_carriers']" position="replace">
           <page name="medios_carriers" string="Spoteo Carriers" attrs="{'invisible': [('med_spoteo_carriers','=',False)]}">
             <group>
-                <field name="sc_marca_producto" required="1"/>
+                <field name="sc_marca_producto" attrs="{'required':[('med_spoteo_carriers', '=', True)]}"/>
                 <field name="sc_inversion"/>
-                <field name="sc_periodo_campana" required="1"/>
+                <field name="sc_periodo_campana" attrs="{'required':[('med_spoteo_carriers', '=', True)]}"/>
                 <field name="sc_catego_televisa"/>
-                <field name="sc_target_primario" required="1"/>
+                <field name="sc_target_primario" attrs="{'required':[('med_spoteo_carriers', '=', True)]}"/>
                 <field name="sc_target_secundario"/>
                 <field name="sc_canales"/>
                 <field name="sc_canales_conocen"/>
+                <br/>
+                
+            </group>
+            <group>
+              <h3>Regulación</h3>
+                <field name="spot_regulacion_cofepris"/>
+                <field name="spot_regulacion_favor"/>
+                <field name="spot_regulacion_kids"/>
             </group>
             <group><h5>Duración Spot</h5></group>
             <group>
@@ -354,14 +360,16 @@
                 <br/>
                 2. No hay acciones especiales a través de carriers
                 <br/>
-                3. Los carriers satelitales van con cobertura nacional. Los carriers por cable se debe especificar plazas; medios informará cual es el carrier que opera en las plazas solicitadas.
+                3. Los carriers satelitales van con cobertura nacional.
                 <br/>
-                4. Categoría (Solo en caso que se incluyan carriers de Televisa). 
+                4. Los carriers por cable se contratan por plaza; Medios informará cual es el carrier que opera en las plazas solicitadas.
+                <br/>
+                5. Categoría (Solo en caso que se incluyan carriers de Televisa). 
                 La categoría debe coincidir con la que el cliente ha dado de alta para su producto en Televisa.
                 En caso de ser producto nuevo, el cliente debe decidir la categoría.
             </div>
             <div class="text-muted">
-                5. En caso de que el target elegido resulte menor al 3% del Universo total, la Dirección de Medios hará una recomendación conforme a la política de Tv Promo.
+                6. En caso de que el target elegido resulte menor al 3% del Universo total, la Dirección de Medios hará una recomendación conforme a la política de Tv Promo.
             </div>
           </page>
         </xpath>
@@ -369,11 +377,11 @@
         <xpath expr="//page[@name='medios_network']" position="replace">
           <page name="medios_network" string="Network Televisa" attrs="{'invisible': [('med_net_televisa','=',False)]}">
             <group>
-              <field name="nt_marca" required="1"/>
+              <field name="nt_marca" attrs="{'required':[('med_net_televisa', '=', True)]}"/>
               <field name="nt_inversion"/>
-              <field name="nt_periodo_campana" required="1"/>
+              <field name="nt_periodo_campana" attrs="{'required':[('med_net_televisa', '=', True)]}"/>
               <field name="nt_catego_televisa"/>
-              <field name="nt_target_primario" required="1"/>
+              <field name="nt_target_primario"/>
               <field name="nt_target_secundario"/>
             </group>
             <group>
@@ -382,7 +390,7 @@
               <!--<field name="nt_cofepris"/>-->
               <field name="nt_regulacion_cofepris"/>
               <field name="nt_regulacion_favor"/>
-              <field name="nt_regulacion_kinds"/>
+              <field name="nt_regulacion_kids"/>
             </group>
             <br/><br/>
             <page name="tabla_network" string="Network">
@@ -399,6 +407,7 @@
             <div>
               <field name="nt_observacion" placeholder="Observaciones"/>
             </div>
+            <br/><br/>
             <!--
             <group string="Spoteo">
               <h3>Las networks Televisa Tienen Cobertura Nacional</h3>
@@ -435,12 +444,11 @@
               <br/>
               1.- Los networks Televisa tienen cobertura nacional.
               <br/>
-              2.- La compra de spots en networks es rotativa aleaatoria por franja. El cargo por posición específica es de 305 sobre tarifa regular. Indicar si se requiere posición específica.
+              2.- La compra de spots en networks es rotativa aleatoria por franja. El cargo por posición específica es de 35% sobre tarifa regular. Indicar si se requiere posición específica.
               <br/>
               3.- La variedad de acciones especiales en networks está acotada a las que pueden realizarse de acuerdo a la estructura y feed de los programas. La factibilidad de cualquier acción que se solicite tiene que verificarse con el proveedor. Deben tomarse en cuenta las fechas de grabación (Aproximadamente un mes antes de aire). Preguntar en medios.
               <br/>
-              4.-Acciones especiales que pueden solicitarse: Pleca, Súper, Banner, Pleca
-              con mención en off, Mención, Edición creativa, Cortinilla a corte, Cortinilla regresa, Cortinilla sorpresiva, Promos vea, Avance de programa, L en contenido, Patrocinio de programa, Patrocinio de sección, Patrocinio de sección en pie, Social TV, Concurso, Entrevista, Bumper, Wiper.
+              4.-Acciones especiales que pueden solicitarse: Pleca, Súper, Banner, Pleca con mención en off, Mención, Edición creativa, Cortinilla a corte, Cortinilla regresa, Cortinilla sorpresiva, Promos vea, Avance de programa, L en contenido, Patrocinio de programa, Patrocinio de sección, Patrocinio de sección con pie, Social TV, Concurso, Entrevista, Bumper, Wiper.
               <br/>
               5.- En caso de que el target elegido resulte menor al 3% del Universo total. la Dirección de Medios hará una recomendación conforme a la política de Tv Promo.
             </div>
@@ -451,17 +459,22 @@
           <page name="medios_otro_net" string="Otros Networks" attrs="{'invisible': [('med_otros_net','=',False)]}">
 
               <group>
-                <field name="ot_marca" required="1"/>
+                <field name="ot_marca" attrs="{'required':[('med_otros_net', '=', True)]}"/>
                 <field name="ot_inversion"/>
-                <field name="ot_target_primario" required="1"/>
-                <field name="ot_target_secundario"/>
+                <field name="ot_target_primario" attrs="{'required':[('med_otros_net', '=', True)]}"/>
+                <field name="ot_target_secundario"/>         
+              </group>
+              <br/>
+              <group>
                 <h3>Regulación</h3>
                 <field name="ot_regulacion_cofepris"/>
                 <field name="ot_regulacion_favor"/>
-                <field name="ot_regulacion_kinds"/>
+                <field name="ot_regulacion_kids"/>
+              </group>
+              <br/>
+              <group>
                 <field name="ot_canales_sel"/>
                 <field name="ot_canales_conocen"/>
-                
               </group>
               <div>
                 <field name="ot_observacion" placeholder="Señalar si se requiere paquete para evento específico (ej.: NFL, Champions League...)" string=" "/>
@@ -479,7 +492,7 @@
               <group>
                 <field name="ot_indicar_rotacion"/>
               </group>
-              <group string="Spoteo">
+              <!--<group string="Spoteo">
                 <field name="ot_monto_inversion"/>
                 <field name="ot_periodo_campana"/>
                 <field name="ot_duracion"/>
@@ -502,7 +515,11 @@
                 <field name="ot_aaee_programa_especifico"/>
                 <field name="ot_aaee_paquete_evento"/>
                 <field name="ot_aaee_observaciones"/>
-              </group>
+              </group>-->
+            <div>
+              <field name="ot_aaee_observaciones" string=" " placeholder="Observaciones o restriccicones"/>
+            </div>
+            <br/><br/>
             <div class="text-muted">
               NOTAS
               <br/>
@@ -523,9 +540,9 @@
           <page name="medios_radio" string="Radio" attrs="{'invisible': [('med_radio','=',False)]}">
             <group>
               <group>
-                <field name="rad_marca" required="1"/>
+                <field name="rad_marca"/>
                 <field name="rad_target_interes"/>
-                <field name="rad_periodo_campana" required="1"/>
+                <field name="rad_periodo_campana" attrs="{'required':[('med_radio', '=', True)]}"/>
                 <field name="rad_monto_inversion"/>
               </group>
               <group>
@@ -565,9 +582,9 @@
           <page name="medios_prensa" string="Prensa" attrs="{'invisible': [('med_prensa','=',False)]}">
             <group>
               <group>
-                <field name="p_marca" required="1"/>
+                <field name="p_marca" attrs="{'required':[('med_prensa', '=', True)]}"/>
                 <field name="p_target_interes"/>
-                <field name="p_periodo_campana" required="1"/>
+                <field name="p_periodo_campana" attrs="{'required':[('med_prensa', '=', True)]}"/>
                 <field name="p_monto_inversion"/>
               </group>
             </group>
@@ -599,9 +616,9 @@
         <!--  PESTAÑA DE REVISTA  -->
         <xpath expr="//page[@name='medios_revista']/group[1]/group[1]" position="replace">
           <group>
-            <field name="r_marca" required="1"/>
+            <field name="r_marca" attrs="{'required':[('med_revista', '=', True)]}"/>
             <field name="r_target_interes"/>
-            <field name="r_periodo_campana" required="1"/>
+            <field name="r_periodo_campana" attrs="{'required':[('med_revista', '=', True)]}"/>
             <field name="r_monto_inversion"/>
           </group>
         </xpath>
@@ -610,10 +627,10 @@
           <page name="medios_ooh" string="OOH" attrs="{'invisible': [('med_ooh','=',False)]}">
             <group>
               <group>
-                <field name="oh_marca" required="1"/>
+                <field name="oh_marca" attrs="{'required':[('med_ooh', '=', True)]}"/>
                 <field name="oh_target_interes"/>
                 <field name="oh_zona_interes"/>
-                <field name="oh_periodo_campana" required="1"/>
+                <field name="oh_periodo_campana" attrs="{'required':[('med_ooh', '=', True)]}"/>
                 <field name="oh_monto_inversion"/>
               </group>
             </group>
@@ -685,8 +702,8 @@
         <!--  CAMBIOS EN LA PESTAÑA DIGITAL  -->
         <xpath expr="//page[@name='medios_digital']/group[1]/group[1]" position="replace">
           <group>
-            <field name="d_marca" required="1"/>
-            <field name="d_periodo_campana" required="1"/>
+            <field name="d_marca" attrs="{'required':[('med_digital', '=', True)]}"/>
+            <field name="d_periodo_campana" attrs="{'required':[('med_digital', '=', True)]}"/>
             <field name="d_target_demo"/>
             <field name="d_target_perfil"/>
             <field name="d_objetivo_campana"/>
