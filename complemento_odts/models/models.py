@@ -8,11 +8,35 @@ class MolOdtMedios(models.Model):
 	#CAMPOS EDITADOS
 	target_especial = fields.Char(string='En caso de ser Target de compra especial, especificar', track_visibility=True)
 	target_compra_modulo = fields.Selection([('1','Niños 4-12'),('2','Jóvenes 13-18'),('3','Personas 19+'),('4','Hombres 19+'),('5','Mujeres 19+'),('6','Amas de casa 19-54 S/DE'),('7','Personas 19-54 S/DE'),('8','Hombres 19-54 S/DE'),('9','Mujeres 19-54 S/DE'),('10','Amas de casa')],string='Target de compra Módulos o Franja', track_visibility=True)
-	#cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
 	
+	#Radio
+	rad_marca = fields.Char(string='Marca o Producto')
+	rad_target_interes = fields.Char(string='Target de Interés')
+	rad_periodo_campana = fields.Char(string='Periodo de transmisión')
+
+	# Digital
+	d_marca = fields.Char(string='Marca o Producto')
+	d_periodo_campana = fields.Char(string='Periodo de la campaña')
+	d_target_demo = fields.Char(string='Target Demográfico')
+	d_target_perfil = fields.Char(string='Target perfil Psicográfico')
+	d_objetivo_campana = fields.Text(string='Objetivo de la campaña')
+
+	# Revista
+	r_marca = fields.Char(string='Marca o Producto')
+	r_target_interes = fields.Char(string='Target de Interés')
+	r_periodo_campana = fields.Char(string='Periodo de la campaña')
+
+	#Spoteo
 	sc_canales = fields.Selection([('1','Rank Rating'),('2','Afinidad Target')],string='Criterio de selección de canales', track_visibility=True)
 	sc_canales_conocen = fields.Text(string='Especificar canales si ya se conocen', track_visibility=True)
+	
 	rotation_indication = fields.Text(string="Indicación de rotación")
+
+	#Analisi habitos
+	an_marca1 = fields.Char(string='Categoría o Marca/Producto de interés')
+	an_target_interes1 = fields.Char(string='Target de interés')
+	#Analisis Audiencias
+	an_target_interes = fields.Char(string='Target de interés')
 
 	#CAMPOS NUEVOS
 	ot_inversion = fields.Float(string="Inversión")
