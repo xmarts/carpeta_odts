@@ -6,6 +6,40 @@
       <field name="model">odt.medios</field>
       <field name="inherit_id" ref="odt_tvp_v2.form_medios_odt"/>
       <field name="arch" type="xml">
+        <xpath expr="//form[1]/sheet[1]/group[1]/group[3]" position="replace">
+          <group colspan="4">
+            <group>
+               <group>
+                <field name="med_spot_tv_abierta" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_spot_tv_abierta_local" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_aaee_tv" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+               </group>
+               <group>
+                <field name="med_spoteo_carriers" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_net_televisa" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_otros_net" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+               </group>
+              </group>
+              <group>
+               <group>
+                <field name="med_radio" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_revista" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_prensa" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>  
+               </group>
+               <group>
+                <field name="med_ooh" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_digital" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="med_analisis"  invisible="1" attrs="{'invisible':[('med_tipo_trabajo','!=','3')]}"/>
+                <field name="lost_reason" invisible="1"/>
+                <field name="date_conversion" invisible="1"/>
+               </group>
+              </group>
+          </group>
+        </xpath>
+        <!--  CAMBIAMOS EL TEXTO DE MARCA DE LA CARATULA -->
+        <xpath expr="//field[@name='marca']" position="attributes">
+          <attribute name="string">Marca o producto</attribute>
+        </xpath>
         <!--  PONEMOS COMO OBLIGATORIO EL CAMPO PERIDO DE CAMPAÑA DE LA CARATULA -->
         <xpath expr="//field[@name='med_periodo_camap']" position="replace">
           <field name="med_periodo_camap" required="1"/>
@@ -158,7 +192,7 @@
 
         <!-- Pestaña televisa tv abierta Local -->
         <xpath expr="//page[@name='medios_local_televisa']" position="replace">
-          <page name="medios_local_televisa" string="Televisa TV Abierta Local" attrs="{'invisible': [('med_spot_tv_abierta','=',False)]}">
+          <page name="medios_local_televisa" string="Televisa TV Abierta Local" attrs="{'invisible': [('med_spot_tv_abierta_local','=',False)]}">
             <group>
               <field name="tvsa_marca_pro" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="tvsa_local"/>
@@ -221,7 +255,7 @@
               <field name="tvsa_abierta"/>
               <field name="sptv_periodo_camp2" attrs="{'required':[('med_spot_tv_abierta', '=', True)]}"/>
               <field name="tvsa_catego_televisa"/>
-              <h5>Duracion Spot</h5>
+              <h5>Duración Spot</h5>
             </group>
             <group colspan="2">
               <group>
@@ -269,7 +303,7 @@
         
         <!--  Pestaña formacion del target ibope  -->
         <xpath expr="//page[@name='medios_ibope']" position="replace">
-          <page name="medios_ibope" string="Formación de Target IBOPE" attrs="{'invisible': [('med_spot_tv_abierta','=',False)]}">
+          <page name="medios_ibope" string="Formación de Target IBOPE" attrs="{'invisible':[('med_spot_tv_abierta','=',False),('med_aaee_tv','=',False),('med_spoteo_carriers','=',False),('med_net_televisa','=',False),('med_otros_net','=',False),('med_spot_tv_abierta_local','=',False)]}">
             <group>
               <h3>Sexo</h3>
                 <field name="tvsa_sexo" string=" "/>
@@ -375,7 +409,7 @@
         </xpath>
         <!--  CAMBIOS EN LA PESTAÑA NETWORK TELEVISA -->
         <xpath expr="//page[@name='medios_network']" position="replace">
-          <page name="medios_network" string="Network Televisa" attrs="{'invisible': [('med_net_televisa','=',False)]}">
+          <page name="medios_network" string="Networks Televisa" attrs="{'invisible': [('med_net_televisa','=',False)]}">
             <group>
               <field name="nt_marca" attrs="{'required':[('med_net_televisa', '=', True)]}"/>
               <field name="nt_inversion"/>
@@ -791,26 +825,27 @@
                 </p>
               </group>
               <group string="Inversión Publicitaria (Competencia) IBOPE" attrs="{'invisible': [('an_inversion','=',False)]}">
-                <field name="an_analisis"/>
-                <field name="an_categoria"/>
+                <field name="an_categoria" string="Categoria IBOPE"/>
+                <field name="an_otra_cat"/>
                 <field name="an_en_caso"/>
-                <h3>Periodo</h3>
-                <field name="periodos_publicitaria" widget="radio" />
+                <field name="an_analisis" required="1"/>
+                <h3>Período</h3>
+                <field name="periodos_publicitaria" widget="radio" string=" "/>
                 <field name="an_periodo" attrs="{'invisible': [('periodos_publicitaria','!=','3')], 'required': [('periodos_publicitaria','=','3')]}"/>
               </group>
               <group string='Audiencias' attrs="{'invisible': [('an_audiencia','=',False)]}">
                 <field name="an_target_interes" attrs="{'required':[('an_audiencia', '=', True)]}"/>
-                <field name="an_analisis1"/>
+                <field name="an_analisis1" required="1"/>
                 <field name="periodos_audiencias" widget="radio" />
                 <field name="an_periodo1" placeholder="Otro periodo" attrs="{'invisible': [('periodos_audiencias','!=','3')], 'required': [('periodos_audiencias','=','3')]}"/>
               </group>
               <group string="Hábitos de consumo (BIMSA)" attrs="{'invisible': [('an_habitos','=',False)]}">
                 <field name="an_marca1" attrs="{'required':[('an_habitos', '=', True)]}"/>
                 <field name="an_target_interes1" attrs="{'required':[('an_habitos', '=', True)]}"/>
-                <field name="an_analisis2"/>
+                <field name="an_analisis2" required="1"/>
               </group>
-              <group string="Otro Analisis" attrs="{'invisible': [('an_otro','=',False)]}">
-                <field name="an_tro_descripcion"/> 
+              <group string="Otro Análisis" attrs="{'invisible': [('an_otro','=',False)]}">
+                <field name="an_tro_descripcion" required="1"/> 
               </group>
             </group>
           </page>
