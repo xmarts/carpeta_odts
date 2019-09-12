@@ -828,24 +828,24 @@
                 <field name="an_categoria" string="Categoria IBOPE"/>
                 <field name="an_otra_cat"/>
                 <field name="an_en_caso"/>
-                <field name="an_analisis" required="1"/>
+                <field name="an_analisis" attrs="{'required':[('an_inversion', '=', True)]}"/>
                 <h3>Período</h3>
                 <field name="periodos_publicitaria" widget="radio" string=" "/>
                 <field name="an_periodo" attrs="{'invisible': [('periodos_publicitaria','!=','3')], 'required': [('periodos_publicitaria','=','3')]}"/>
               </group>
               <group string='Audiencias' attrs="{'invisible': [('an_audiencia','=',False)]}">
                 <field name="an_target_interes" attrs="{'required':[('an_audiencia', '=', True)]}"/>
-                <field name="an_analisis1" required="1"/>
+                <field name="an_analisis1" attrs="{'required':[('an_audiencia', '=', True)]}"/>
                 <field name="periodos_audiencias" widget="radio" />
                 <field name="an_periodo1" placeholder="Otro periodo" attrs="{'invisible': [('periodos_audiencias','!=','3')], 'required': [('periodos_audiencias','=','3')]}"/>
               </group>
               <group string="Hábitos de consumo (BIMSA)" attrs="{'invisible': [('an_habitos','=',False)]}">
                 <field name="an_marca1" attrs="{'required':[('an_habitos', '=', True)]}"/>
                 <field name="an_target_interes1" attrs="{'required':[('an_habitos', '=', True)]}"/>
-                <field name="an_analisis2" required="1"/>
+                <field name="an_analisis2" attrs="{'required':[('an_habitos', '=', True)]}"/>
               </group>
               <group string="Otro Análisis" attrs="{'invisible': [('an_otro','=',False)]}">
-                <field name="an_tro_descripcion" required="1"/> 
+                <field name="an_tro_descripcion" attrs="{'required':[('an_otro', '=', True)]}"/> 
               </group>
             </group>
           </page>
