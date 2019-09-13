@@ -582,7 +582,7 @@
               <group>
                 <field name="rad_marca"/>
                 <field name="rad_target_interes" attrs="{'required':[('med_radio', '=', True)]}"/>
-                <field name="rad_periodo_campana" attrs="{'required':[('med_radio', '=', True)]}"/>
+                <field name="rad_periodo_campana"/>
                 <field name="rad_monto_inversion"/>
               </group>
               <group>

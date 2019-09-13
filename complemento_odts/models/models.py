@@ -12,7 +12,7 @@ class MolOdtMedios(models.Model):
 	#Radio
 	rad_marca = fields.Char(string='Marca o Producto', track_visibility=True)
 	rad_target_interes = fields.Char(string='Target de Interés', track_visibility=True)
-	rad_periodo_campana = fields.Char(string='Periodo de transmisión', track_visibility=True, compute="_get_pc")
+	rad_periodo_campana = fields.Char(string='Periodo de transmisión', track_visibility=True)
 
 	# Digital
 	d_marca = fields.Char(string='Marca o Producto', track_visibility=True)
