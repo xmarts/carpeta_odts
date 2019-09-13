@@ -259,6 +259,7 @@ class MolOdtMedios(models.Model):
 	@api.depends('med_periodo_camap')		
 	def _get_pc(self):
 		if self.med_periodo_camap != "":
+			self.rad_periodo_campana = self.med_periodo_camap
 			self.sptv_periodo_camp2 = self.med_periodo_camap
 			self.period_campania_tvab = self.med_periodo_camap
 			self.aaeetv_periodo_camp = self.med_periodo_camap
