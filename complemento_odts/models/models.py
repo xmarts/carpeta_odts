@@ -56,7 +56,7 @@ class MolOdtMedios(models.Model):
 	opcion_compra = fields.Selection([('1','CPR MÓDULOS'),('2','CPR FRANJAS'),('3','MIXTO MÓDULO Y FRANJA'),('4','CPR POR PROGRAMA'),('5','SPOTEO')],string='Negociación del cliente', track_visibility=True)
 
 	#CAMPOS NUEVOS
-	med_spot_tv_abierta_local = fields.Boolean(string='Televisa TV Abierta Local', track_visibility=True)
+	med_spot_tv_abierta_local = fields.Boolean(string='TVSA TVA Local', track_visibility=True)
 
 	ot_inversion = fields.Float(string="Inversión")
 	ot_regulacion_cofepris = fields.Boolean(string="COFEPRIS", track_visibility=True)
