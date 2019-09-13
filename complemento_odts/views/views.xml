@@ -442,6 +442,10 @@
                 </tree>
               </field>
             </page>
+            <group>
+              <field name="ir_network"/>
+              <br/><br/>
+            </group>
             <div>
               <field name="nt_observacion" placeholder="Observaciones"/>
             </div>
@@ -614,7 +618,14 @@
                   </tree>
                 </field>
               </page>
-              <field name="rad_observaciones" placeholder="Observaciones"/>
+              <group>
+                <field name="rad_ir"/>
+                <br/><br/>
+              </group>
+              <div>
+                <field name="rad_observaciones" placeholder="Observaciones"/>
+              </div>
+              
           </page>
         </xpath>
         <!--  CAMBIAOS EN LA PESTAÑA PRENSA -->

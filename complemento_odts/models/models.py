@@ -97,6 +97,9 @@ class MolOdtMedios(models.Model):
 	tvsa_local_regulacion_favor = fields.Boolean(string="A favor de lo mejor", track_visibility=True)
 	tvsa_local_regulacion_kids = fields.Boolean(string="Kids policy", track_visibility=True)
 
+	ir_network = fields.Char(string="Indicación de rotación", track_visibility=True)
+	rad_ir = fields.Char(string="Indicación de rotación", track_visibility=True)
+
 	tabla_box_bool = fields.One2many('mod.box.tbl', 'id_box_tbl', ondelete="cascade", track_visibility=True)
 	tabla_canal5_bool = fields.One2many('mod.canal5.tbl', 'id_canal5_tbl', ondelete="cascade", track_visibility=True)
 	tabla_comedia_bool = fields.One2many('mod.come.tbl', 'id_comedia_tbl', ondelete="cascade", track_visibility=True)
