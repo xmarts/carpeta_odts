@@ -125,6 +125,7 @@ class MolOdtMedios(models.Model):
 	nt_conoce_programas = fields.Char(string='Si conoce el(los) programa(s) indicar', track_visibility=True)
 	#nt_cofepris = fields.Selection([('1','COFEPRIS'),('2','A favor de lo mejor'),('3','Kids policy')],string=' ', track_visibility=True)
 	nt_observacion = fields.Char(string=" ", track_visibility=True)
+	nt_rot_indicar = fields.Char(string="Indicar rotación")
 
 	#-- FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#
 	@api.depends('years_03','years_48','years_912','tvsa_rol_family','tvsa_sexo','tvsa_nse_1','tvsa_nse_2','tvsa_nse_3','tvsa_nse_4','tvsa_grupo_edad_1','tvsa_grupo_edad_2','tvsa_grupo_edad_3','tvsa_grupo_edad_4','tvsa_grupo_edad_5','tvsa_grupo_edad_6','tvsa_grupo_edad_otro')

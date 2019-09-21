@@ -447,6 +447,8 @@
               <br/><br/>
             </group>
             <div>
+              <field name="nt_rot_indicar" />
+              <br/><br/>
               <field name="nt_observacion" placeholder="Observaciones"/>
             </div>
             <br/><br/>
