@@ -10,48 +10,51 @@ class MolOdtMedios(models.Model):
 	target_compra_modulo = fields.Selection([('1','Niños 4-12'),('2','Jóvenes 13-18'),('3','Personas 19+'),('4','Hombres 19+'),('5','Mujeres 19+'),('6','Amas de casa 19-54 S/DE'),('7','Personas 19-54 S/DE'),('8','Hombres 19-54 S/DE'),('9','Mujeres 19-54 S/DE'),('10','Amas de casa')],string='Target de compra Módulos o Franja', track_visibility=True)
 	med_periodo_camap = fields.Char(string='Periodo campaña y/o promoción', track_visibility=True)
 	#Radio
-	rad_marca = fields.Char(string='Marca o Producto', track_visibility=True)
+	rad_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
 	rad_target_interes = fields.Char(string='Target de Interés', track_visibility=True)
-	rad_periodo_campana = fields.Char(string='Periodo de transmisión', track_visibility=True)
+	rad_periodo_campana = fields.Char(related="med_periodo_camap", string='Periodo de transmisión', track_visibility=True)
 
 	# Digital
-	d_marca = fields.Char(string='Marca o Producto', track_visibility=True)
-	d_periodo_campana = fields.Char(string='Periodo de la campaña', track_visibility=True)
+	d_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
+	d_periodo_campana = fields.Char(related="med_periodo_camap", string='Periodo de la campaña', track_visibility=True)
 	d_target_demo = fields.Char(string='Target Demográfico', track_visibility=True)
 	d_target_perfil = fields.Char(string='Target perfil Psicográfico', track_visibility=True)
 	d_objetivo_campana = fields.Text(string='Objetivo de la campaña', track_visibility=True)
 
 	# Revista
-	r_marca = fields.Char(string='Marca o Producto', track_visibility=True)
+	r_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
 	r_target_interes = fields.Char(string='Target de Interés', track_visibility=True)
-	r_periodo_campana = fields.Char(string='Periodo de la campaña')
+	r_periodo_campana = fields.Char(related="med_periodo_camap", string='Periodo de la campaña')
 
 	#Spoteo
 	sc_canales = fields.Selection([('1','Rank Rating'),('2','Afinidad Target')],string='Criterio de selección de canales', track_visibility=True)
 	sc_canales_conocen = fields.Text(string='Especificar canales si ya se conocen', track_visibility=True)
-	sc_marca_producto = fields.Char(string='Marca o Producto', track_visibility=True)
+	sc_marca_producto = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
 
 	rotation_indication = fields.Text(string="Indicación de rotación", track_visibility=True)
 
 	#Analisi habitos
 	an_marca1 = fields.Char(string='Categoría o Marca/Producto de interés', track_visibility=True)
 	an_target_interes1 = fields.Char(string='Target de interés', track_visibility=True)
+
 	#Analisis Audiencias
 	an_target_interes = fields.Char(string='Target de interés', track_visibility=True)
 
-	nt_marca = fields.Char(string='Marca o Producto', track_visibility=True)
-	ot_marca = fields.Char(string='Marca o Producto', track_visibility=True)
+	nt_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
+	ot_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
 
-	p_marca = fields.Char(string='Marca o Producto', track_visibility=True)
+	p_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto', track_visibility=True)
 	p_target_interes = fields.Char(string='Target de Interés', track_visibility=True)
-	p_periodo_campana = fields.Char(string='Período de la campaña', track_visibility=True)
+	p_periodo_campana = fields.Char(related="med_periodo_camap", string='Período de la campaña', track_visibility=True)
 
-	sptv_periodo_camp2 = fields.Char(string='Período de la Campaña', track_visibility=True)
-	period_campania_tvab = fields.Char(string="Período de la campaña", track_visibility=True)
-	aaeetv_periodo_camp = fields.Char(string='Período de la Campaña', track_visibility=True)
-	sc_periodo_campana = fields.Char(string='Período de la Campaña', track_visibility=True)
-	nt_periodo_campana = fields.Char(string='Período de la Campaña', track_visibility=True)
-	oh_periodo_campana = fields.Char(string='Período de la campaña', track_visibility=True)
+	sptv_periodo_camp2 = fields.Char(related="med_periodo_camap", string='Período de la Campaña', track_visibility=True)
+	period_campania_tvab = fields.Char(related="med_periodo_camap", string="Período de la campaña", track_visibility=True)
+	aaeetv_periodo_camp = fields.Char(related="med_periodo_camap", string='Período de la Campaña', track_visibility=True)
+	sc_periodo_campana = fields.Char(related="med_periodo_camap", string='Período de la Campaña', track_visibility=True)
+	nt_periodo_campana = fields.Char(related="med_periodo_camap", string='Período de la Campaña', track_visibility=True)
+	oh_periodo_campana = fields.Char(related="med_periodo_camap", string='Período de la campaña', track_visibility=True)
+
+	oh_marca = fields.Char(related="crm_odt_id.marca.name", string='Marca o Producto')
 
 	opcion_compra = fields.Selection([('1','CPR MÓDULOS'),('2','CPR FRANJAS'),('3','MIXTO MÓDULO Y FRANJA'),('4','CPR POR PROGRAMA'),('5','SPOTEO')],string='Negociación del cliente', track_visibility=True)
 
@@ -84,7 +87,7 @@ class MolOdtMedios(models.Model):
 
 	target_tvsa = fields.Char(string="Target", track_visibility=True)
 
-	aaee_marca_producto = fields.Char(string="Marca o producto", track_visibility=True)
+	aaee_marca_producto = fields.Char(related="crm_odt_id.marca.name", string="Marca o producto", track_visibility=True)
 	aaee_inversion = fields.Float(string="Inversión", track_visibility=True)
 
 	telenovelas_bool = fields.Boolean(string='Telenovelas', track_visibility=True)
@@ -113,8 +116,8 @@ class MolOdtMedios(models.Model):
 	nt_tabla_net =fields.One2many('mod.net.tbl', 'id_net_tbl', ondelete="cascade", track_visibility=True)
 
 	tvsa_primario = fields.Char(string="TERGET PRIMARIO CREADO", compute="_get_valor_primario", track_visibility=True)
-	tvsa_marca_pro = fields.Char(string="Marca o producto", track_visibility=True)
-	tvsa_marca_pro_nac = fields.Char(string="Marca o producto", track_visibility=True)
+	tvsa_marca_pro = fields.Char(related="crm_odt_id.marca.name", string="Marca o producto", track_visibility=True)
+	tvsa_marca_pro_nac = fields.Char(related="crm_odt_id.marca.name", string="Marca o producto", track_visibility=True)
 
 	sc_inversion = fields.Float(string="Inversión", track_visibility=True)
 	sc_indicar_rotacion = fields.Text(string="Indicar rotación", track_visibility=True)
@@ -243,107 +246,7 @@ class MolOdtMedios(models.Model):
 				rn3 = ' 9 a 12 años'	
 
 		self.tvsa_primario = sexo + ge_1 + ge_2 + ge_3 + ge_4 + ge_5 + ge_6 + ge_otro + nse_1 + nse_2 + nse_3 + nse_4 + rol + rn + rn2 + rn3
-		#-- FIN FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#
-
-	@api.onchange('crm_odt_id')
-	def _funcion_marca(self):
-		if self.marca:
-			self.tvsa_marca_pro = self.marca.name
-			self.tvsa_marca_pro_nac = self.marca.name
-			self.aaee_marca_producto = self.marca.name
-			self.sc_marca_producto = self.marca.name
-			self.nt_marca = self.marca.name
-			self.ot_marca = self.marca.name
-			self.rad_marca = self.marca.name
-			self.r_marca = self.marca.name
-			self.p_marca = self.marca.name
-			self.oh_marca = self.marca.name
-			self.d_marca = self.marca.name
-
-	@api.depends('med_periodo_camap')
-	@api.onchange('med_periodo_camap')
-	def _get_periodo(self):
-		if self.med_periodo_camap != '':
-			self.rad_periodo_campana = self.med_periodo_camap
-			self.sptv_periodo_camp2 = self.med_periodo_camap
-			self.period_campania_tvab = self.med_periodo_camap
-			self.aaeetv_periodo_camp = self.med_periodo_camap
-			self.sc_periodo_campana = self.med_periodo_camap
-			self.nt_periodo_campana = self.med_periodo_camap
-			self.r_periodo_campana = self.med_periodo_camap
-			self.p_periodo_campana = self.med_periodo_camap
-			self.oh_periodo_campana = self.med_periodo_camap
-			self.d_periodo_campana = self.med_periodo_camap
-
-	@api.depends('rad_periodo_campana')
-	@api.onchange('rad_periodo_campana')
-	def _get_rad_pc(self):
-		if self.med_periodo_camap:
-			if self.rad_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.rad_periodo_campana
-
-	@api.depends('sptv_periodo_camp2')
-	@api.onchange('sptv_periodo_camp2')
-	def _get_sptv_pc(self):
-		if self.med_periodo_camap:
-			if self.sptv_periodo_camp2 != self.med_periodo_camap:
-				self.med_periodo_camap = self.sptv_periodo_camp2
-
-	@api.depends('period_campania_tvab')
-	@api.onchange('period_campania_tvab')
-	def _get_tvab_pc(self):
-		if self.med_periodo_camap:
-			if self.period_campania_tvab != self.med_periodo_camap:
-				self.med_periodo_camap = self.period_campania_tvab
-
-	@api.depends('aaeetv_periodo_camp')
-	@api.onchange('aaeetv_periodo_camp')
-	def _get_aaeetv_pc(self):
-		if self.med_periodo_camap:
-			if self.aaeetv_periodo_camp != self.med_periodo_camap:
-				self.med_periodo_camap = self.aaeetv_periodo_camp
-
-	@api.depends('sc_periodo_campana')
-	@api.onchange('sc_periodo_campana')
-	def _get_sc_pc(self):
-		if self.med_periodo_camap:
-			if self.sc_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.sc_periodo_campana
-
-	@api.depends('r_periodo_campana')
-	@api.onchange('r_periodo_campana')
-	def _get_r_pc(self):
-		if self.med_periodo_camap:
-			if self.r_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.r_periodo_campana
-
-	@api.depends('p_periodo_campana')
-	@api.onchange('p_periodo_campana')
-	def _get_p_pc(self):
-		if self.med_periodo_camap:
-			if self.p_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.p_periodo_campana
-
-	@api.depends('oh_periodo_campana')
-	@api.onchange('oh_periodo_campana')
-	def _get_p_pc(self):
-		if self.med_periodo_camap:
-			if self.oh_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.oh_periodo_campana
-
-	@api.depends('d_periodo_campana')
-	@api.onchange('d_periodo_campana')
-	def _get_p_pc(self):
-		if self.med_periodo_camap:
-			if self.d_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.d_periodo_campana									
-											
-	@api.depends('nt_periodo_campana')
-	@api.onchange('nt_periodo_campana')
-	def _get_nt_pc(self):
-		if self.med_periodo_camap:
-			if self.nt_periodo_campana != self.med_periodo_camap:
-				self.med_periodo_camap = self.nt_periodo_campana			
+		#-- FIN FUNCION PARA OBTENER EL VALOR EN AUTOMATICO DEL CAMPO PRIMARIO --#	
 			
 
 class TablaTVabiertaAdi(models.Model):

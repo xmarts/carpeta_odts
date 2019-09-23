@@ -592,6 +592,7 @@
                 <field name="rad_target_interes" attrs="{'required':[('med_radio', '=', True)]}"/>
                 <field name="rad_periodo_campana"/>
                 <field name="rad_monto_inversion"/>
+                <field name="rad_ir"/>
               </group>
               <group>
               </group>
@@ -622,10 +623,10 @@
                   </tree>
                 </field>
               </page>
-              <group>
+              <!--<group>
                 <field name="rad_ir"/>
                 <br/><br/>
-              </group>
+              </group>-->
               <div>
                 <field name="rad_observaciones" placeholder="Observaciones"/>
               </div>
@@ -786,7 +787,7 @@
         <xpath expr="//page[@name='medios_digital']/group[1]/group[1]" position="replace">
           <group>
             <field name="d_marca"/>
-            <field name="d_periodo_campana" attrs="{'required':[('med_digital', '=', True)]}"/>
+            <field name="d_periodo_campana"/>
             <field name="d_target_demo" attrs="{'required':[('med_digital', '=', True)]}"/>
             <field name="d_target_perfil" attrs="{'required':[('med_digital', '=', True)]}"/>
             <field name="d_objetivo_campana" attrs="{'required':[('med_digital', '=', True)]}"/>
