@@ -443,12 +443,14 @@
               </field>
             </page>
             <group>
-              <field name="ir_network"/>
-              <br/><br/>
-            </group>
-            <div>
               <field name="nt_rot_indicar" />
               <br/><br/>
+            </group>
+            <!--<group>
+              <field name="ir_network"/>
+              <br/><br/>
+            </group>-->
+            <div>
               <field name="nt_observacion" placeholder="Observaciones"/>
             </div>
             <br/><br/>
