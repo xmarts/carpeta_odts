@@ -592,6 +592,7 @@
                 <field name="rad_target_interes" attrs="{'required':[('med_radio', '=', True)]}"/>
                 <field name="rad_periodo_campana"/>
                 <field name="rad_monto_inversion"/>
+                <field name="radio_indicar_rot"/>
               </group>
               <group>
               </group>
@@ -622,10 +623,6 @@
                   </tree>
                 </field>
               </page>
-              <group>
-                <field name="radio_indicar_rot"/>
-                <br/><br/>
-              </group>
               <div>
                 <field name="rad_observaciones" placeholder="Observaciones"/>
               </div>
