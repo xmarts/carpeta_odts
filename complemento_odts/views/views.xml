@@ -444,8 +444,8 @@
             </page>
             <group>
               <field name="nt_rot_indicar" />
-              <br/><br/>
             </group>
+            <br/>
             <!--<group>
               <field name="ir_network"/>
               <br/><br/>
@@ -592,7 +592,6 @@
                 <field name="rad_target_interes" attrs="{'required':[('med_radio', '=', True)]}"/>
                 <field name="rad_periodo_campana"/>
                 <field name="rad_monto_inversion"/>
-                <field name="radio_indicar_rot"/>
               </group>
               <group>
               </group>
@@ -623,6 +622,10 @@
                   </tree>
                 </field>
               </page>
+              <group>
+                <field name="radio_indicar_rot"/>
+              </group>
+              <br/>
               <div>
                 <field name="rad_observaciones" placeholder="Observaciones"/>
               </div>
